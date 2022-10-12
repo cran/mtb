@@ -12,11 +12,23 @@
 
 <meta name="author" content="Y. Hsu" />
 
-<meta name="date" content="2022-02-04" />
+<meta name="date" content="2022-10-12" />
 
-<title>vignette_mtb_color</title>
+<title>mtb: Set Color</title>
 
-<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -26,6 +38,7 @@
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
     </style>
+
 
 
 <style type="text/css">
@@ -109,13 +122,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
+    var j = 0;
+    while (j < rules.length) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -127,7 +147,187 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
 
 
 
@@ -139,33 +339,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<h1 class="title toc-ignore">vignette_mtb_color</h1>
+<h1 class="title toc-ignore">mtb: Set Color</h1>
 <h4 class="author">Y. Hsu</h4>
-<h4 class="date">2022-02-04</h4>
+<h4 class="date">2022-10-12</h4>
 
 
 
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mtb)</span></code></pre></div>
 <div id="background" class="section level2">
 <h2>Background</h2>
-<p>The section of colors are flexible and convenient using functions like <code>grDevices::colorRamp()</code>, or <code>grDevices::rainbow()</code>. There are situations that we need to reserve some colors for some specific groups, and control the mapping of color and group values. <code>color_set_palette()</code> generate a list of color by taking group values and allows two reserved colors. <code>color_test_palette()</code> shows selected palette on two different formats (bar or line) to visually inspect the color selection.</p>
+<p>The section of colors are flexible and convenient using functions
+like <code>grDevices::colorRamp()</code>, or
+<code>grDevices::rainbow()</code>. There are situations that we need to
+reserve some colors for some specific groups, and control the mapping of
+color and group values. <code>color_set_palette()</code> generate a list
+of color by taking group values and allows two reserved colors.
+<code>color_test_palette()</code> shows selected palette on two
+different formats (bar or line) to visually inspect the color
+selection.</p>
 </div>
 <div id="how-to-use" class="section level2">
 <h2>How to use</h2>
-<p>This is a basic example which shows you how to automatically select colors for each of the categories, a to g, by setting 3 major colors. The second argument specify the order of ‘a’ to ‘g’. The third and fourth arguments specify that ‘a’ is assigned to the black color, and ‘b’ is assigned to the gray color.</p>
+<p>This is a basic example which shows you how to automatically select
+colors for each of the categories, a to g, by setting 3 major colors.
+The second argument specify the order of ‘a’ to ‘g’. The third and
+fourth arguments specify that ‘a’ is assigned to the black color, and
+‘b’ is assigned to the gray color.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mtb)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>colvect <span class="ot">=</span> <span class="fu">color_set_palette</span>(<span class="fu">c</span>(<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;d&#39;</span>,<span class="st">&#39;c&#39;</span>,<span class="st">&#39;e&#39;</span>,<span class="st">&#39;f&#39;</span>,<span class="st">&#39;g&#39;</span>), <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>),<span class="at">black=</span><span class="st">&#39;a&#39;</span>,<span class="at">gray9=</span><span class="st">&#39;b&#39;</span>,<span class="at">cols=</span><span class="fu">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;cyan&#39;</span>,<span class="st">&#39;orange&#39;</span>))</span></code></pre></div>
-<p>This is a basic example which shows you how to quickly test selected colors:</p>
+<p>This is a basic example which shows you how to quickly test selected
+colors:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">color_test_palette</span>(colvect, <span class="at">type=</span><span class="st">&#39;bar&#39;</span>)</span></code></pre></div>
 <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAqAAAAEgCAMAAABcujGyAAAAYFBMVEUAAAAAADoAAGYAAP8AOpAAZrYAf/8A//86AAA6ADo6kNtmAABmADpmkJBmtv9/0n+QOgCQkGaQ2/+ZmZm2ZgC2tma225C2///bkDrb////pQD/tmb/25D//7b//9v///9knFb6AAAACXBIWXMAAA7DAAAOwwHHb6hkAAAHF0lEQVR4nO3cW2/cBBSFUbfcAuUaAgSS0v//L5lkEBJSOaJndpPddn0PPM62J0u2x0g93kjFHc99ANIUoKoOUFUHqKoDVNUBquoAVXWAqjpAVR2gqg5QVQeoqgNU1QGq6gBVdYCqOkBVHaCqDlBVB6iqA1TVAarqAFV1gKo6QFUdoKoOUFUHqKoDVNUBquoAVXWAqjpAVR2gqg5QVQeoqgNU1QGq6gBVdYCqOkBVHaCqDlBVB6iqA1TVAarqAFV1gKo6QFUdoKoOUFUHqKoDVNUBquoAVXWAqjpAVR2gqg5QVQeoqgNU1QGq6gBVdYCqOkBVHaCqDlBVB6iqA1TVAarqAFV1gKo6QFUdoKoOUFUHqKoDVNU9BdBDn3YX4UkpnDZi/Rzq+CzU8WWo46tQxw+pjj9CAQoooBdtAAroGk9K4bQBKKBrPCmF0waggK7xpBROG4ACusaTUjhtAAroGk9K4bQBKKBrPCmF0waggK7xpBROG4ACusaTUjhtAAroGk9K4bQBKKBrPCmF0waggK7xpBROG4ACusaTUjhtAAroGk9K4bQBKKBrPCmF0waggK7xpBROG4ACusaTUjhtAAroGk9K4bQBKKBrPCmF0waggK7xpBROG4ACusaTUjhtAAroGk9K4bQBKKBrPCmF0waggK7xpBROG4ACusaTUjhtAAroGk9K4bQBKKBrPCmF0waggK7xpBROG4ACusaTUjhtAAroGk9K4bQBKKBrPCmF0waggK7xpBROG4ACusaTUjhtAAroGk9K4bQBKKBrPCmF0waggK7xpBROG4ACusaTUjhtAAroGk9K4bQBKKBrPCmF0waggK7xpBROG4ACusaTUjhtAAroGk9K4bQBKKBrPCmF0waggK7xpBROG4ACusaTUjhtAAroGk9K4bQBKKBrPCmF0waggK7xpBROG4ACusaTUjhtAAroGk9K4bQBKKBrPCmF0waggK7xpBROG4ACusaTUjhtAAroGk9K4bQBKKBrPCmF0waggK7xpBROG4ACusaTUjhtAAroGk9K4bQBKKBrPCmF0waggK7xpBROG4ACusaTUjhtAAroGk9K4bQBKKBrPCmF0waggK7xpBROG4ACusaTUjhtAAroGk9K4bQBKKBrPCmF0waggK7xpBROG4ACusaTUjhtAAroGk9K4bQBKKBrPCmF0waggK7xpBROG4ACusaTUjhtAAroGk9K4bQBKKBrPCmF0waggK7xpBROG4ACusaTUjhtAAroGk9K4bQBKKBrPCmF0waggK7xpBROG4ACusaTUjhtAAroGk9K4bQBKKBrPCmF0waggK7xpBROG4ACusaTUjhtAAroGk9K4bQBKKBrPCmF0waggK7xpBROG4ACusaTUjhtAAroGk9K4bQBKKBrPCmF0waggK7xpBROG4ACusaTUjhtAAroGk9K4bQBKKBrPCmF0waggK7xpBROG4ACusaTUjhtAAroGk9K4bQBKKBrPCmF0waggK7xpBROG4ACusaTUjhtAAroGk9K4bQBKKBrPCmF0waggK7xpBROG4ACusaTUjhtAAroGk9K4bQBKKBrPCmF0waggK7xpBROG/q0uwhPSqH0PgJU1QGq6gBVdYCqOkBVHaCqDlBVB6iqA1TVAarqAFV1gKo6QFUdoKoOUFUHqKoDVNUBquoAVXWAqjpAVR2gqg5QVfcxAb2/+v65D+Ht3b24fu5D+Fe3x/HNcx/D/w3QJ6gM6OtXHwxPQJ+kOqCl39PbqgB6cxxH4Du7v/ruKnbzOt0Gjy8yn/PipwTQhwOKnNv96Ut6+Vvgg25SpzbVAPTmBOE2cKL3V6cPub+K/BUfjidxK7w5Ubg7Aid3mzu30BU0dmpjBUBff3uduT2f/363iatD6jHtfFo3l/8Vzwd0F7nyZYDGTm2uAOhDd4l7/PkrizzwpR5nz6ICh3T+iMxhZYDGTm2uAejp6erlr4kr6NfX//w38lGXdxsD+vc/tdkDNHZqcwVAHy8LmVv8x34FzeQK+m49nuld5Bb/+Az6+e+XH1P2GTTwCzD5aij5DJr4cTtWAPThTF+/CrxCefwVn5D+5vzF//nj5e+Zbh8PKfQrPvSTxK/4d+zhVeF14Ls/vwcNXWkq34NGfsTHrsY3pwP6JXNI/10DUH24ZV58DQGqXY/PoO//f+sDqmV3qddeY4CqOkBVHaCqDlBVB6iqA1TVAarqAFV1gKo6QFUdoKoOUFUHqKoDVNUBquoAVXWAqjpAVR2gqg5QVQeoqgNU1QGq6gBVdYCqOkBVHaCqDlBVB6iqA1TVAarqAFV1gKo6QFUdoKoOUFUHqKoDVNUBquoAVXWAqjpAVR2gqg5QVQeoqgNU1QGq6gBVdYCqOkBVHaCqDlBVB6iqA1TVAarqAFV1gKo6QFUdoKoOUFX3F+vopsYZU/OxAAAAAElFTkSuQmCC" /><!-- --></p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">color_test_palette</span>(colvect, <span class="at">type=</span><span class="st">&#39;line&#39;</span>)</span></code></pre></div>
 <p><img src="data:image/png;base64,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" /><!-- --></p>
-<p>Below is an example that uses <code>grDevices::rainbow()</code> function to generate a color vector to be used as major colors. Note that if the order of group is set as NULL, the order will be given by the alphabetical order of group values.</p>
+<p>Below is an example that uses <code>grDevices::rainbow()</code>
+function to generate a color vector to be used as major colors. Note
+that if the order of group is set as NULL, the order will be given by
+the alphabetical order of group values.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>group<span class="ot">=</span><span class="fu">paste</span>(<span class="st">&#39;g&#39;</span>, <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>,<span class="dv">120</span>, <span class="at">replace=</span>T), <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>colvect <span class="ot">=</span> <span class="fu">color_set_palette</span>(group, <span class="cn">NULL</span>, <span class="at">black=</span><span class="st">&#39;g1&#39;</span>,<span class="at">gray9=</span><span class="st">&#39;g2&#39;</span>,<span class="at">cols=</span><span class="fu">rainbow</span>(<span class="dv">5</span>))</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning in color_set_palette(group, NULL, black = &quot;g1&quot;, gray9 = &quot;g2&quot;, cols =</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; rainbow(5)): invalid vectn</span></span></code></pre></div>
-<p>This is a basic example which shows you how to quickly test selected colors:</p>
+<p>This is a basic example which shows you how to quickly test selected
+colors:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">color_test_palette</span>(colvect, <span class="at">type=</span><span class="st">&#39;bar&#39;</span>)</span></code></pre></div>
 <p><img src="data:image/png;base64,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" /><!-- --></p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">color_test_palette</span>(colvect, <span class="at">type=</span><span class="st">&#39;line&#39;</span>)</span></code></pre></div>

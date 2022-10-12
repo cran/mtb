@@ -20,9 +20,9 @@ dt = data.frame( id=c(rep('Sous Chef',3), rep('Both',3), rep('Chef',4)), idn=c(r
 label=c('Turkey', 'Watch Temp', 'Gravy', 'Stuffing', 'Whipped Cream', 'Cookie', 'Cranberry', 'Potato', 'Green Bean', 'Pumpkin Pie'), labelend=c('', '', '~~?', '->>', 'not shown', '', '', '', '||', '->X'), color=c('Oven', 'Other', 'Stove','Oven','Other','Oven','Stove','Oven','Oven','Oven' ), type=c('b', 'p', 'i','i','p','p','p','b','i','i' ) )
 dt[1:5,]
 
-## -----------------------------------------------------------------------------
+## ---- fig.width=7-------------------------------------------------------------
 time_plot_event( dt ) 
 
-## -----------------------------------------------------------------------------
+## ---- fig.width=7-------------------------------------------------------------
 time_plot_event( dt, compact=TRUE )
 
