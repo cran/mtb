@@ -26,3 +26,8 @@ head(bill_cross_count(exdt[1:6], id='name', gp=c('category1'), type = 'cond', co
 head(bill_cross_count(exdt[1:6], id='name', gp=c('category1'), type = 'condwt', condstr='store==1' ) )
 
 
+## ----example_5----------------------------------------------------------------
+
+head(bill_cross_check(exdt[[1]], exdt[[2]], id=c('category1', 'name','store') ) )
+
+
